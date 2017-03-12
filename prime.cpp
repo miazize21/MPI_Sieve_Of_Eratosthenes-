@@ -95,9 +95,11 @@ int main(int argc, char** argv)
 	for ( i = 0; i < MAX_PRIME; i++ )
 		if ( working[i] )
 			primes[nPrimes++] = i;
-
 	
- 	
+	nPrimes_divide = 0; 
+	for ( i = 0; i < MAX_PRIME; i++ )  
+		if ( working[i] )   
+			primes_divide[nPrimes_divide++] = i; 	
 
 	unsigned long long int ip,  ip_data, ip_localdata;
 	unsigned long long int delta = 100000000;
@@ -198,31 +200,8 @@ if (rank==0)
 		ip_rem = next_rem;
 	
 	}
-   } 
-	for ( i = 0; i < MAX_PRIME; i++ )
-	{
-		working[i] = 1;
-	}
-	working[0] = working[1] = 0;
-
-	// sieve
-	for ( i = 2; i < SQRT_MAX_PRIME; i++ )
-	{
-		if ( working[i] )
-		{
-			for ( j = 2*i; j < MAX_PRIME; j += i )
-			{
-				working[j] = 0;
-			}
-		}
-	}
-    nPrimes_divide = 0;
-
-	for ( i = 0; i < MAX_PRIME; i++ )
-		if ( working[i] )
-			primes_divide[nPrimes_divide++] = i;
-
-   if (rank != 0)
+   }    
+if (rank != 0)
    { 
 nPrimes = nPrimes - nPrimes_divide;
    }
