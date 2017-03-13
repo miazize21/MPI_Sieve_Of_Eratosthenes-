@@ -213,10 +213,10 @@ MPI_Gather(&nPrimes, 1, MPI_LONG_LONG_INT, nPrimes_sum,1, MPI_LONG_LONG_INT, 0, 
 MPI_Barrier(MPI_COMM_WORLD);
 	elapsed_time += MPI_Wtime();
 if ( rank ==0){
-for (int i = 0; i< comm_size+1; i++){
+for (int i = 0; i< comm_size; i++){
 printf("array: %lld ", nPrimes_sum[i]);
 }
-for (int j = 0; j< comm_size; j++){
+for (int j = 0; j< comm_size-1; j++){
 sum = sum + nPrimes_sum[j];
 }
 printf("prime counting function(%lld)  = %lld\n", pmax, sum);
