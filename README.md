@@ -1,6 +1,6 @@
 # MPI_Sieve_Of_Eratosthenes-
 
-compile - mpicc++ prime.cpp -o prime
+compile - mpic++ prime.cpp -o prime
 
 int x;
 
