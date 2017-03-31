@@ -197,7 +197,7 @@ printf("localdata: %lld\n", localdata[localdata_size-1]);
     }
    if (rank ==0){
 	unsigned long long int ip_rem = data_rem[1];
-    if(data_rem[0] < pmax)
+    if(data_rem[0] < pmax | data_rem[0] != data_rem[1])
 	{
 	
     while (ip_rem < pmax)
