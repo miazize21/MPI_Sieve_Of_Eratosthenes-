@@ -228,3 +228,15 @@ for (int i = 0; i< comm_size; i++){
 printf("array: ");
 printf("%lld ", nPrimes_sum[i]);
 }
+for (int j = 0; j< comm_size; j++){
+sum = sum + nPrimes_sum[j];
+}
+printf("prime counting function(%lld)  = %lld\n", pmax, sum);
+printf("Total elapsed time: %10.6fs\n", elapsed_time);
+}
+free(primes);
+
+	
+	MPI_Finalize();
+	return 0;
+}
