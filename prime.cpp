@@ -15,12 +15,10 @@ int CountPrimes(unsigned long long int n0, unsigned long long int n1, unsigned l
 	// * n1 <= max(basePrimes)^2 (a composite number must have a prime factor <= its square root)
 	// * n1-n0 is small enough so we can allocate an array of (n1-n0)*64 bits.
 	int nPrimes = 0;
-
 	int i;
 	unsigned long long *working;
 	working = (unsigned long long int*)malloc((n1 - n0) * sizeof(unsigned long long int));
 	memset(working, 0, (n1 - n0) * sizeof(unsigned long long int));
-
 	for (i = 0; i < nBasePrimes; i++)
 	{
 		// find starting point
@@ -38,12 +36,9 @@ int CountPrimes(unsigned long long int n0, unsigned long long int n1, unsigned l
 	for (i = 0; i < (n1 - n0); i++)
 		if (!working[i])
 			nPrimes++;
-
 	free(working);
-
 	return nPrimes;
 }           
-
 int main(int argc, char** argv)
 {
 	int rank, comm_size;
@@ -56,12 +51,10 @@ int main(int argc, char** argv)
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
 	
-	
 	unsigned long long int nPrimes;
 	unsigned long long int nPrimes_divide;
   int i, j;
     
-
 #define MAX_PRIME 100000 // we are counting primes up to 1e10, so we need a base primes list up to sqrt(1e10) = 1e5
 #define SQRT_MAX_PRIME 317 // the largest number we will need to cross out multiples of for our base prime list
 
@@ -131,16 +124,12 @@ if(rank==0)
 while ( ip_data < pmax )
 	{
 for (int i = 1; i < size; i++) {
-
 			unsigned long long int next = ip_data + delta;
 		if (next > pmax)
 			next = pmax;
-		ip_data = next;
-		
-			data[i] = ip_data;			
-			
+		ip_data = next;		
+			data[i] = ip_data;						
 			}
-			  printf("data: %lld\n", data[size-1]);	
 		}
     }
 	last_data= ((divided*comm_size-1)*delta)+ data[0]; //last data if the data array was equally divided between the ranks
@@ -157,8 +146,7 @@ if (rank==0)
 			next = pmax;
 		last_data = next;
 		
-			data_rem[i] = last_data;			
-			
+			data_rem[i] = last_data;						
 			} 	
 		printf("data_rem_last: %lld\n", data_rem[rem_size-1]);
     }
